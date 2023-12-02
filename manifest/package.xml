@@ -44,6 +44,17 @@
         <name>Profile</name>
     </types>
 
+    <types>
+        <members>Opportunity-Revenue Recognition</members>
+        <members>Product2-Revenue Recognition</members>
+        <name>Layout</name>
+    </types>
+
+    <types>
+        <members>Opportunity.Update_Schedules</members>
+        <name>QuickAction</name>
+    </types>
+
     
     <version>58.0</version>
 </Package>
