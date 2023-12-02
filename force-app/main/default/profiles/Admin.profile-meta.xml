@@ -95,6 +95,9 @@
         <layout>Opportunity-Revenue Recognition</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>OpportunityLineItem-Revenue Recognition</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Product2-Revenue Recognition</layout>
     </layoutAssignments>
     <userLicense>Salesforce</userLicense>

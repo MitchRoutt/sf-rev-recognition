@@ -47,6 +47,7 @@
     <types>
         <members>Opportunity-Revenue Recognition</members>
         <members>Product2-Revenue Recognition</members>
+        <members>OpportunityLineItem-Revenue Recognition</members>
         <name>Layout</name>
     </types>
 
