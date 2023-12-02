@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <types>
+        <members>Product</members>
+        <name>Settings</name>
+    </types>
+
+    <types>
+
+        <members>Opportunity.Term_End_Date__c</members>
+        <members>Opportunity.Term_Start_Date__c</members>
+        <members>Opportunity.Update_Forecast__c</members>
+
+        <members>OpportunityLineItem.End_Date__c</members>
+        <members>OpportunityLineItem.Manual_Adjustment__c</members>
+        <members>OpportunityLineItem.Product_Line_Months__c</members>
+        <members>OpportunityLineItem.Product_Type__c</members>
+        <members>OpportunityLineItem.YR1__c</members>
+        <members>OpportunityLineItem.YR1_One_Time__c</members>
+        <members>OpportunityLineItem.YR2__c</members>
+        <members>OpportunityLineItem.YR3__c</members>
+        <members>OpportunityLineItem.YR4__c</members>
+        <members>OpportunityLineItem.YR5__c</members>
+
+        <members>OpportunityLineItemSchedule.Product_ID__c</members>
+        <members>OpportunityLineItemSchedule.Term__c</members>        
+        <members>OpportunityLineItemSchedule.Term_End_Date__c</members>
+        <members>OpportunityLineItemSchedule.Term_Start_Date__c</members>
+
+        <members>Product2.Product_Type__c</members>
+
+        <name>CustomField</name>
+    </types>
+
+    <types>
+        <members>Update_Schedules_and_Calculate_Rev_Years</members>
+        <members>Update_Schedules_from_Oppty_Button_Click</members>
+        <name>Flow</name>
+    </types>
+    
+    <version>58.0</version>
+</Package>

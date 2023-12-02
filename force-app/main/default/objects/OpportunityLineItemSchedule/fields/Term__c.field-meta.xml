@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Term__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+ ( ScheduleDate &gt;= ADDMONTHS( Term_Start_Date__c ,-1) &amp;&amp; ScheduleDate &lt;= ADDMONTHS(Term_Start_Date__c ,11)), 
+&quot;YR1&quot;, 
+IF( ( ScheduleDate &gt; ADDMONTHS(Term_Start_Date__c  ,11) &amp;&amp; ADDMONTHS(Term_Start_Date__c ,11) &lt;= ADDMONTHS( Term_End_Date__c ,1) &amp;&amp; 
+ScheduleDate &lt; ADDMONTHS(Term_Start_Date__c ,24) ), 
+&quot;YR2&quot;, 
+IF( 
+( ScheduleDate &gt; ADDMONTHS(Term_Start_Date__c  ,23) &amp;&amp; ADDMONTHS(Term_Start_Date__c ,23) &lt;= ADDMONTHS( Term_End_Date__c ,1) &amp;&amp; 
+ ScheduleDate &lt; ADDMONTHS(Term_Start_Date__c ,36) ), 
+&quot;YR3&quot;, 
+IF( 
+( ScheduleDate &gt; ADDMONTHS(Term_Start_Date__c  ,35) &amp;&amp; ADDMONTHS(Term_Start_Date__c ,35) &lt;= ADDMONTHS( Term_End_Date__c ,1) &amp;&amp;
+ScheduleDate &lt; ADDMONTHS(Term_Start_Date__c ,48) ), 
+&quot;YR4&quot;, 
+IF( 
+( ScheduleDate &gt; ADDMONTHS(Term_Start_Date__c  ,47) &amp;&amp; ADDMONTHS(Term_Start_Date__c ,47) &lt;= ADDMONTHS( Term_End_Date__c ,1) &amp;&amp;
+ScheduleDate &lt; ADDMONTHS(Term_Start_Date__c ,60) ), 
+&quot;YR5&quot;,
+&quot;n/a&quot;
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Term</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

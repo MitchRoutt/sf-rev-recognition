@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Line_Months__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(year(End_Date__c)-year(ServiceDate)=0 &amp;&amp; month(End_Date__c)-month(ServiceDate)= 0,1,(((End_Date__c-ServiceDate)/30.5)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Product Line Months</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
