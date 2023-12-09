@@ -56,6 +56,15 @@
         <name>QuickAction</name>
     </types>
 
-    
+    <types>
+        <members>Public_Reports/Schedule_Report_Basic_AsL2</members>
+        <name>Report</name>
+    </types>
+
+    <types>
+        <members>Opportunity_Product_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+
     <version>58.0</version>
 </Package>
