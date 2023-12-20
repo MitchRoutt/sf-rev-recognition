@@ -1,2 +1,2 @@
-select opportunitylineitemid, revenue from OpportunityLineItemSchedule
-
+select opportunitylineitemid, revenue, createddate from OpportunityLineItemSchedule
+ORDER BY createddate DESC

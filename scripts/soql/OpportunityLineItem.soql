@@ -1,1 +1,7 @@
-select Name, Product_Type__c, TotalPrice, Product_Line_Months__c, End_Date__c from OpportunityLineItem
+select Type, Name, Product_Type__c, TotalPrice, Product_Line_Months__c, ServiceDate, End_Date__c,  Quantity 
+from OpportunityLineItem
+
+
+select id, revenue from OpportunityLineItemSchedule
+
+select id, Product_Line_Months__c from OpportunityLineItem
