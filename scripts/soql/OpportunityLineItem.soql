@@ -1,4 +1,4 @@
-select Type, Name, Product_Type__c, TotalPrice, Product_Line_Months__c, ServiceDate, End_Date__c,  Quantity 
+select Name, Product_Type__c, TotalPrice, Product_Line_Months__c, ServiceDate, End_Date__c,  Quantity 
 from OpportunityLineItem
 
 

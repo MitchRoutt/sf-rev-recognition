@@ -16,18 +16,28 @@ global with sharing class CreateOpportunityLineItemSchedules {
         Opportunity opportunity = [SELECT Id, Term_Start_Date__c, Term_End_Date__c FROM Opportunity WHERE Id = :opportunityId LIMIT 1];
 
         // Get all of the OpportunityLineItem records for the Opportunity
-        List<OpportunityLineItem> lineItems = [SELECT Id, TotalPrice, ServiceDate, End_Date__c, Product2Id, Quantity FROM OpportunityLineItem WHERE OpportunityId = :opportunityId];
+        List<OpportunityLineItem> lineItems = [SELECT Id, TotalPrice, ServiceDate, End_Date__c, Product2Id, Quantity, Product2.Product_Type__c 
+                                                FROM OpportunityLineItem WHERE OpportunityId = :opportunityId];
 
         deleteExistingSchedulesForLineItems(lineItems);
 
         for(OpportunityLineItem lineItem : lineItems) {
 
-            // If the line item has dates, use them. Otherwise use the Opportunity dates
-            Date startDate = lineItem.ServiceDate == null ? opportunity.Term_Start_Date__c : lineItem.ServiceDate;
-            Date endDate = lineItem.End_Date__c == null ? opportunity.Term_End_Date__c : lineItem.End_Date__c;
+            System.debug('Checking Line Item');
+            if(lineItem.Product2.Product_Type__c == 'Subscription') {
 
-            //Figure out how many monthly schedule records to create for this line item
-            schedulesToInsert.addAll(createMonthlySchedules(lineItem));
+                System.debug('Line Item Type was Subscription');
+
+                // If the line item has dates, use them. Otherwise use the Opportunity dates
+                Date startDate = lineItem.ServiceDate == null ? opportunity.Term_Start_Date__c : lineItem.ServiceDate;
+                Date endDate = lineItem.End_Date__c == null ? opportunity.Term_End_Date__c : lineItem.End_Date__c;
+
+                System.debug('Start date is: ' + startDate.format());
+                System.debug('End date is: ' + endDate.format());
+
+                //Figure out how many monthly schedule records to create for this line item
+                schedulesToInsert.addAll(createMonthlySchedules(startDate, endDate, lineItem));
+            }
         }
 
         insert schedulesToInsert;
@@ -47,16 +57,16 @@ global with sharing class CreateOpportunityLineItemSchedules {
         delete schedulesToDelete;
     }
 
-    private static List<OpportunityLineItemSchedule> createMonthlySchedules(OpportunityLineItem lineItem) {
+    private static List<OpportunityLineItemSchedule> createMonthlySchedules(Date startDate, Date endDate, OpportunityLineItem lineItem) {
 
         //TODO: Make this configurable rather than for a static 12 months
         Decimal monthlyPrice = lineItem.TotalPrice / 12;
 
         List<OpportunityLineItemSchedule> schedules = new List<OpportunityLineItemSchedule>();
 
-        Date periodStartDate = lineItem.ServiceDate;
+        Date periodStartDate = startDate;
 
-        while(periodStartDate < lineItem.End_Date__c) {
+        while(periodStartDate < endDate) {
 
             OpportunityLineItemSchedule schedule = new OpportunityLineItemSchedule();
             schedule.OpportunityLineItemId = lineItem.Id;
@@ -64,8 +74,8 @@ global with sharing class CreateOpportunityLineItemSchedules {
             schedule.Revenue = monthlyPrice;
             schedule.ScheduleDate = periodStartDate;
             schedule.Product_ID__c = lineItem.Product2Id;
-            schedule.Term_Start_Date__c = lineItem.ServiceDate;
-            schedule.Term_End_Date__c = lineItem.End_Date__c;
+            schedule.Term_Start_Date__c = startDate;
+            schedule.Term_End_Date__c = endDate;
 
             schedules.add(schedule);
 
