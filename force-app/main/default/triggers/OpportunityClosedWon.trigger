@@ -4,8 +4,10 @@ trigger OpportunityClosedWon on Opportunity (after update) {
 
     for(Opportunity opp : Trigger.new) {
 
-        if(opp.StageName == 'Closed Won') {
-
+        // Only add the Opportunity Id if the StageName was changed to "Closed Won"
+        Opportunity oldOpp = Trigger.oldMap.get(opp.Id);
+        if(opp.StageName == 'Closed Won' && oldOpp.StageName != 'Closed Won') {
+            
             closedWonIds.add(opp.Id);
         }
     }

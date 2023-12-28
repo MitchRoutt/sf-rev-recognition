@@ -19,11 +19,12 @@ global with sharing class CreateOpportunityLineItemSchedules {
         List<OpportunityLineItem> lineItems = [SELECT Id, TotalPrice, ServiceDate, End_Date__c, Product2Id, Quantity, Product2.Product_Type__c 
                                                 FROM OpportunityLineItem WHERE OpportunityId = :opportunityId];
 
+        System.debug('Number of lineItems is: ' + lineItems.size());
+
         deleteExistingSchedulesForLineItems(lineItems);
 
         for(OpportunityLineItem lineItem : lineItems) {
 
-            System.debug('Checking Line Item');
             if(lineItem.Product2.Product_Type__c == 'Subscription') {
 
                 System.debug('Line Item Type was Subscription');
@@ -31,9 +32,6 @@ global with sharing class CreateOpportunityLineItemSchedules {
                 // If the line item has dates, use them. Otherwise use the Opportunity dates
                 Date startDate = lineItem.ServiceDate == null ? opportunity.Term_Start_Date__c : lineItem.ServiceDate;
                 Date endDate = lineItem.End_Date__c == null ? opportunity.Term_End_Date__c : lineItem.End_Date__c;
-
-                System.debug('Start date is: ' + startDate.format());
-                System.debug('End date is: ' + endDate.format());
 
                 //Figure out how many monthly schedule records to create for this line item
                 schedulesToInsert.addAll(createMonthlySchedules(startDate, endDate, lineItem));
@@ -67,6 +65,8 @@ global with sharing class CreateOpportunityLineItemSchedules {
         Date periodStartDate = startDate;
 
         while(periodStartDate < endDate) {
+
+            System.debug('PeriodStartDate is: ' + periodStartDate.format() + ' EndDate is: ' + endDate.format());
 
             OpportunityLineItemSchedule schedule = new OpportunityLineItemSchedule();
             schedule.OpportunityLineItemId = lineItem.Id;
